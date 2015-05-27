@@ -81,7 +81,7 @@ Book.prototype.checkIsbn =  function(isbn) {
     return true;
 
 };
-Book.prototype.getIsbn = function(isbn) {
+Book.prototype.getIsbn = function() {
     return this.isbn;
 };
 
@@ -99,10 +99,6 @@ Book.prototype.setTitle = function(title) {
 };
 
 Book.prototype.getAuthor = function() {
-    return this.author;
-};
-
-Book.prototype.getAuthor =  function() {
     return this.author;
 };
 
