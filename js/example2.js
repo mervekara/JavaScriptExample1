@@ -43,68 +43,81 @@ var Book = function(isbn, title, author) {
     this.setAuthor(author);
 }
 
-Book.prototype = {
-    checkIsbn: function(isbn) {
-        if (isbn == undefined || typeof isbn != 'string') {
-            return false;
-        }
-        isbn = isbn.replace(/-/g,'');
-        if (isbn.length != 10 && isbn.length != 13) {
-            return false;
-        }
-        var sum = 0;
-        if (isbn.length == 10) {
-            if (!isbn.match(/[0-9]/)) {
-                return false;
-            }
-            for (var i = 0; i < 9 ; i++) {
-                sum += isbn.charAt(i) * (10 - i);
-            }
-            var checkSum = sum % 11;
-            if (checkSum == 10) checkSum = 'X';
-            if (isbn.charAt(9) != checkSum) {
-                return false;
-            }
-        } else {
-            if (!isbn.match(/[0-9]/)) {
-                return false;
-            }
-            for (var i = 0; i < 12; i++) {
-                sum += isbn.charAt(i) * ((i % 2 === 0) ? 1 : 3);
-            }
-            var checkSum = sum % 10;
-            if (isbn.charAt(12) != checkSum) {
-                return false;
-            }
-
-        }
-        
-        return true;
-    },
-    getIsbn : function() {
-        console.log(isbn);
-        return this.isbn;
-    },
-    setIsbn : function(isbn) {
-        if(!this.checkIsbn(isbn)) throw new Error('Book: Invalid ISBN.');
-        this.isbn = isbn;
-    },
-    getTitle : function() {
-        return this.title;
-    },
-    setTitle : function(title) {
-        this.title = title || 'No title specified';
-    },
-    getAuthor : function() {
-        return this.author;
-    },
-    setAuthor : function(author) {
-        this.author = author || 'No author specified';
-    },
-    display: function() {
-        document.write(this.author + ", " + this.title + ", " + this.isbn + " ");
+Book.prototype.checkIsbn =  function(isbn) {
+    if (isbn == undefined || typeof isbn != 'string') {
+        return false;
     }
+    isbn = isbn.replace(/-/g,'');
+    if (isbn.length != 10 && isbn.length != 13) {
+        return false;
+    }
+    var sum = 0;
+    if (isbn.length == 10) {
+        if (!isbn.match(/[0-9]/)) {
+            return false;
+        }
+        for (var i = 0; i < 9 ; i++) {
+            sum += isbn.charAt(i) * (10 - i);
+        }
+        var checkSum = sum % 11;
+        if (checkSum == 10) checkSum = 'X';
+        if (isbn.charAt(9) != checkSum) {
+            return false;
+        }
+    } else {
+        if (!isbn.match(/[0-9]/)) {
+            return false;
+        }
+        for (var i = 0; i < 12; i++) {
+            sum += isbn.charAt(i) * ((i % 2 === 0) ? 1 : 3);
+        }
+        var checkSum = sum % 10;
+        if (isbn.charAt(12) != checkSum) {
+            return false;
+        }
+
+    }
+
+    return true;
+
 };
+Book.prototype.getIsbn = function(isbn) {
+    return this.isbn;
+};
+
+Book.prototype.setIsbn = function(isbn) {
+    if(!this.checkIsbn(isbn)) throw new Error('Book: Invalid ISBN.');
+    this.isbn = isbn;
+};
+
+Book.prototype.getTitle = function() {
+    return this.title;
+};
+
+Book.prototype.setTitle = function(title) {
+    this.title = title || 'No title specified';
+};
+
+Book.prototype.getAuthor = function() {
+    return this.author;
+};
+
+Book.prototype.getAuthor =  function() {
+    return this.author;
+};
+
+Book.prototype.setAuthor = function(author) {
+    this.author = author || 'No author specified';
+};
+
+
+Book.prototype.display = function() {
+    console.log(this.getTitle());
+    console.log(this.getAuthor());
+    console.log(this.getIsbn());
+    document.write(this.getAuthor() + ", " + this.getTitle() + ", " + this.getIsbn() + " ");
+};
+
 
 var theHobbit = new Book('0-395-07122-7', 'The Hobbit', 'J. R. R. Tolkien');
 theHobbit.display();

@@ -80,14 +80,13 @@ Book.convertToTitleCase = function(inputString){
     
 };
 
-Book.prototype = {
-    display: function() {       
-        console.log(this.getTitle());
-        console.log(this.getAuthor());
-        console.log(this.getIsbn());
-        document.write(this.getAuthor() + ", " + this.getTitle() + ", " + this.getIsbn() + " ");
-    }
+Book.prototype.display = function() {
+    console.log(this.getTitle());
+    console.log(this.getAuthor());
+    console.log(this.getIsbn());
+    document.write(this.getAuthor() + ", " + this.getTitle() + ", " + this.getIsbn() + " ");
 };
+
 
 var theHobbit = new Book('0-395-07122-7', 'The Hobbit', 'J. R. R. Tolkien');
 theHobbit.display();
